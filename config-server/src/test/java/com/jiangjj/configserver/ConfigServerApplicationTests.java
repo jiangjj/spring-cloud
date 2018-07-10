@@ -1,4 +1,4 @@
-package jiangjj.configserver;
+package com.jiangjj.configserver;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

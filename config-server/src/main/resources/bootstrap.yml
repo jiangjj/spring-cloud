@@ -1,3 +1,13 @@
 spring:
   application:
     name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/jiangjj/spring-cloud
+          search-paths: config-server/src/main/resources/config-files
+server:
+  port: 8888
+encrypt:
+  key: myEncryptKey
