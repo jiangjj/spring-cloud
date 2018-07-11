@@ -4,11 +4,16 @@ my:
 server:
   port: 8081
 spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/testdb?useSSL=false
-    username: root
-    password: mysql
   jpa:
-    hibernate:
-      ddl-auto: create-drop
     show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+  datasource:
+    username: super
+    password: postgresql
+    url: jdbc:postgresql://localhost:5432/testdb
