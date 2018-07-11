@@ -1,0 +1,16 @@
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+  datasource:
+    username: super
+    password: postgresql
+    url: jdbc:postgresql://localhost:5432/testdb
+server:
+  port: 8082
