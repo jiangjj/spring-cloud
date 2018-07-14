@@ -1,0 +1,7 @@
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/jiangjj/spring-cloud
+          search-paths: config-files

@@ -1,0 +1,8 @@
+server:
+  port: 8901
+spring:
+  application:
+    name: oauth2
+  cloud:
+      config:
+        uri: http://localhost:8888

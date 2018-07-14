@@ -9,15 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @EnableConfigServer
-@RestController
 public class ConfigServerApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ConfigServerApplication.class, args);
 	}
 
-	@GetMapping(value = "/message")
-	public String message(@Value("${my.message:da}") String message) {
-		return message;
-	}
 }
