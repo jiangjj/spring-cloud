@@ -11,6 +11,6 @@ spring:
   datasource:
     username: super
     password: postgresql
-    url: jdbc:postgresql://localhost:5432/testdb
+    url: jdbc:postgresql://dev-db:5432/testdb
 server:
   port: 8082
