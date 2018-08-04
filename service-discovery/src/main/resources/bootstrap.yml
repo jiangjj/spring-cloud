@@ -3,10 +3,5 @@ spring:
     name: servicediscovery
   cloud:
     config:
-      uri: http://localhost:8888
-eureka:
-  instance:
-    hostname: peer1
-  client:
-    service-url:
-      defaultZone: http://peer2/eureka/
+      uri: http://config-server:8888
+

@@ -17,7 +17,7 @@ public class OrganizationServiceTemplateClient implements OrganizationServiceCli
     @Override
     public Organization getOrganization(String organizationId) {
         logger.info("getOrganization by id:" + organizationId);
-        ResponseEntity<Organization> restExchange = restTemplate.exchange("http://localhost:9000/organizationservice/v1/organizations/{organizationId}",
+        ResponseEntity<Organization> restExchange = restTemplate.exchange("http://api-gateway:9000/organizationservice/v1/organizations/{organizationId}",
                 HttpMethod.GET, null, Organization.class, organizationId);
         return restExchange.getBody();
     }
