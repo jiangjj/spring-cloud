@@ -1,6 +1,17 @@
 spring:
   zipkin:
-    base-url: http://:9411
+    base-url: http://ziplin:9411
   sleuth:
     sampler:
       probability: 1.0
+  cloud:
+    stream:
+      bindings:
+        output:
+                  destination: orgChangeTopic
+                  content-type: application/json
+  rabbitmq:
+    host: mq-dev
+logging:
+  level:
+    com.jiangjj: DEBUG

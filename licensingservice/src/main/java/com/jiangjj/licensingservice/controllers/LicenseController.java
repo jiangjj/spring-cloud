@@ -1,6 +1,5 @@
 package com.jiangjj.licensingservice.controllers;
 
-import com.jiangjj.licensingservice.clients.OrganizationServiceTemplateClient;
 import com.jiangjj.licensingservice.models.License;
 import com.jiangjj.licensingservice.services.LicenseService;
 import lombok.AllArgsConstructor;
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "v1/organizations/{organizationId}/licenses")
+@RequestMapping(value = "/v1/organizations/{organizationId}/licenses")
 @AllArgsConstructor
 public class LicenseController {
 

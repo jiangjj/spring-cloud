@@ -1,7 +1,10 @@
 package com.jiangjj.licensingservice;
 
+import com.jiangjj.licensingservice.clients.OrganizationRestTemplateClient;
 import com.jiangjj.licensingservice.clients.OrganizationServiceClient;
 import com.jiangjj.licensingservice.clients.OrganizationServiceTemplateClient;
+import com.jiangjj.licensingservice.events.CustomerChannels;
+import com.jiangjj.licensingservice.repositories.OrganizationRedisRepository;
 import com.jiangjj.licensingservice.utils.UserContextInterceptor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,6 +12,8 @@ import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoR
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.cloud.stream.annotation.EnableBinding;
+import org.springframework.cloud.stream.messaging.Sink;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
@@ -44,9 +49,10 @@ public class LicensingserviceApplication {
 	}*/
 
 	@Bean
-	public OrganizationServiceClient organizationServiceClient(RestTemplate restTemplate) {
-		return new OrganizationServiceTemplateClient(restTemplate);
+	public OrganizationServiceClient organizationServiceClient(RestTemplate restTemplate, OrganizationRedisRepository organizationRedisRepository) {
+		return new OrganizationRestTemplateClient(restTemplate, organizationRedisRepository);
 	}
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(LicensingserviceApplication.class, args);

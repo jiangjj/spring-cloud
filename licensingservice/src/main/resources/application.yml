@@ -4,3 +4,17 @@ spring:
   sleuth:
     sampler:
       probability: 1.0
+  redis:
+    host: redis
+  rabbitmq:
+    host: mq-dev
+  cloud:
+    stream:
+      bindings:
+        inboundOrgChanges:
+          destination: orgChangeTopic
+          content-type: application/json
+          group: licensingGroup
+logging:
+  level:
+    com.jiangjj: DEBUG
