@@ -16,4 +16,4 @@ spring:
   datasource:
     username: super
     password: postgresql
-    url: jdbc:postgresql://dev-db:5432/testdb
+    url: jdbc:postgresql://db-dev:5432/testdb
