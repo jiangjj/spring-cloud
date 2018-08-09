@@ -67,9 +67,9 @@
         </encoder>
     </appender>
     <!-- 为logstash输出的JSON格式的Appender -->
-    <appender name="logstash-remote"
+    <appender name="logstash-tcp"
               class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-        <destination>localhost:5044</destination>
+        <destination>logstash:9601</destination>
         <!-- 日志输出编码 -->
         <encoder
                 class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
@@ -94,12 +94,13 @@
                 </pattern>
             </providers>
         </encoder>
-    </appender>​
+    </appender>
+    ​
     <root level="INFO">
         <appender-ref ref="console"/>
         <!-- uncomment this to have also JSON logs -->
-        <appender-ref ref="logstash"/>
-        <appender-ref ref="logstash-remote"/>
+        <!--<appender-ref ref="logstash"/>-->
+        <appender-ref ref="logstash-tcp"/>
         <!--<appender-ref ref="flatfile"/>-->
     </root>
 </configuration>

@@ -1,0 +1,9 @@
+version:  '3'
+services:
+  licensingservice:
+    build: licensingservice
+    image: springboot/licensingservice
+
+  organizationservice:
+    build: organizationservice
+    image: springboot/organizationservice

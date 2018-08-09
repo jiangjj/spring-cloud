@@ -1,7 +1,5 @@
 spring:
   application:
     name: servicediscovery
-  cloud:
-    config:
-      uri: http://config-server:8888
+
 

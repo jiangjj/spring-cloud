@@ -1,0 +1,82 @@
+version:  '3'
+services:
+  db-dev:
+    image: paintedfox/postgresql
+    environment:
+      USER: "root"
+      DB: "testdb"
+      PASS: "postgresql"
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis
+    command: redis-server --appendonly yes
+    ports:
+      - "6379:6379"
+
+  mq-dev:
+    image: rabbitmq:3-management
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+
+  config-server:
+    build: config-server
+    image: springboot/config-server
+    ports:
+      - "8888:8888"
+
+  service-discovery:
+    build: service-discovery
+    image: springboot/service-discovery
+    ports:
+      - "8761:8761"
+
+  oauth2:
+    build: oauth2
+    image: springboot/oauth2
+
+  api-gateway:
+    build: zuul
+    image: springboot/zuul
+    ports:
+      - "9000:9000"
+
+  zipkin:
+    image: openzipkin/zipkin
+    ports:
+      - "9411:9411"
+    environment:
+      RABBIT_ADDRESSES: "mq-dev"
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.3.2
+    container_name: elasticsearch
+    restart: always
+    ports:
+    - "9200:9200"
+    - "9300:9300"
+    volumes:
+    - ./elk/elasticsearch/data:/usr/share/elasticsearch/data
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:6.3.2
+    container_name: logstash
+    restart: always
+    ports:
+    - "9601:9601"
+    volumes:
+    - ./elk/logstash/config-dir:/config-dir
+    command: logstash -f /config-dir
+    depends_on:
+    - elasticsearch
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:6.3.2
+    container_name: kibana
+    restart: always
+    ports:
+    - "5601:5601"
+    depends_on:
+    - elasticsearch

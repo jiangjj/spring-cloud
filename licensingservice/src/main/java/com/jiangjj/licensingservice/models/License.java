@@ -1,5 +1,6 @@
 package com.jiangjj.licensingservice.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 

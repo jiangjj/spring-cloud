@@ -1,6 +1,6 @@
 spring:
   zipkin:
-    base-url: http://zipkin:9411
+    base-url: http://localhost:9411/
   sleuth:
     sampler:
       probability: 1.0
@@ -15,6 +15,3 @@ spring:
           destination: orgChangeTopic
           content-type: application/json
           group: licensingGroup
-logging:
-  level:
-    com.jiangjj: DEBUG

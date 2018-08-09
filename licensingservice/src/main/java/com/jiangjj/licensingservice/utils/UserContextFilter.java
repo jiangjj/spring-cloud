@@ -22,7 +22,7 @@ public class UserContextFilter implements Filter {
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
         logger.debug("I am entering the licensing service id with auth token: ", httpServletRequest.getHeader("Authorization"));
         UserContext.setAuthToken(httpServletRequest.getHeader(UserContext.AUTH_TOKEN));
-        UserContext.setCorrelationId(httpServletRequest.getHeader(UserContext.CORRELATION_ID));
+//        UserContext.setCorrelationId(httpServletRequest.getHeader(UserContext.CORRELATION_ID));
         filterChain.doFilter(httpServletRequest, servletResponse);
 
     }
