@@ -12,5 +12,3 @@ spring:
     username: super
     password: postgresql
     url: jdbc:postgresql://db-dev:5432/testdb
-server:
-  port: 8082
