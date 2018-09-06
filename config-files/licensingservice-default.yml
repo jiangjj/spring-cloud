@@ -1,17 +1,17 @@
 my:
   message: myMessage3
   encryptMessage: '{cipher}a605a2097c68da8a4925b7bf8a04b3c6ab850713b1a2a0c8a4a331b557cbd9f8'
-spring:
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        jdbc:
-          lob:
-            non_contextual_creation: true
-  datasource:
-    username: super
-    password: postgresql
-    url: jdbc:postgresql://db-dev:5432/testdb
+#spring:
+#  jpa:
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: update
+#    properties:
+#      hibernate:
+#        jdbc:
+#          lob:
+#            non_contextual_creation: true
+#  datasource:
+#    username: super
+#    password: postgresql
+#    url: jdbc:postgresql://db-dev:5432/testdb
