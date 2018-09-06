@@ -1,14 +1,14 @@
-spring:
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        jdbc:
-          lob:
-            non_contextual_creation: true
-  datasource:
-    username: super
-    password: postgresql
-    url: jdbc:postgresql://db-dev:5432/testdb
+#spring:
+#  jpa:
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: update
+#    properties:
+#      hibernate:
+#        jdbc:
+#          lob:
+#            non_contextual_creation: true
+#  datasource:
+#    username: super
+#    password: postgresql
+#    url: jdbc:postgresql://db-dev:5432/testdb
