@@ -25,6 +25,7 @@
 		<module>organizationservice</module>
 		<module>zuul</module>
 		<module>oauth2</module>
+		<module>breaker-dashboard</module>
 	</modules>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

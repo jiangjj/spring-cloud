@@ -1,10 +1,10 @@
 package com.jiangjj.licensingservice.services;
 
 import com.jiangjj.licensingservice.clients.OrganizationServiceClient;
-import com.jiangjj.licensingservice.clients.OrganizationServiceTemplateClient;
 import com.jiangjj.licensingservice.models.License;
 import com.jiangjj.licensingservice.models.Organization;
 import com.jiangjj.licensingservice.repositories.LicenseRepository;
+import com.jiangjj.organizationservice.models.OrganizationProto;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import lombok.AllArgsConstructor;
@@ -23,9 +23,10 @@ public class LicenseServiceImpl implements LicenseService{
     private OrganizationServiceClient templateClient;
 
     @Override
+    @HystrixCommand
     public License getLicense(String organizationId, String licenseId) {
         License license = licenseRepository.findByOrganizationIdAndLicenseId(organizationId, licenseId);
-        Organization organization = templateClient.getOrganization(organizationId);
+        OrganizationProto.Organization organization = templateClient.getOrganization(organizationId);
         license.setOrganizationName(organization.getName());
         return license;
     }
@@ -73,17 +74,20 @@ public class LicenseServiceImpl implements LicenseService{
         return fallbackList;
     }
     @Override
+    @HystrixCommand
     public void saveLicense(License license) {
         license.setLicenseId(UUID.randomUUID().toString());
         licenseRepository.save(license);
     }
 
     @Override
+    @HystrixCommand
     public void updateLicense(License license) {
         licenseRepository.save(license);
     }
 
     @Override
+    @HystrixCommand
     public void deleteLicense(License license) {
         licenseRepository.delete(license);
     }

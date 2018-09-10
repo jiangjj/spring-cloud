@@ -23,7 +23,7 @@ services:
 
   config-server:
     build: config-server
-    image: springboot/config-server
+    image: springboot/configs-server
     ports:
       - "8888:8888"
 
@@ -67,8 +67,8 @@ services:
     ports:
     - "9601:9601"
     volumes:
-    - ./elk/logstash/config-dir:/config-dir
-    command: logstash -f /config-dir
+    - ./elk/logstash/configs-dir:/configs-dir
+    command: logstash -f /configs-dir
     depends_on:
     - elasticsearch
 

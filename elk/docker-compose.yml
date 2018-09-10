@@ -17,8 +17,8 @@ services:
     ports:
       - "9601:9601"
     volumes:
-    - ./logstash/config-dir:/config-dir
-    command: logstash -f /config-dir
+    - ./logstash/configs-dir:/configs-dir
+    command: logstash -f /configs-dir
     depends_on:
     - elasticsearch
 

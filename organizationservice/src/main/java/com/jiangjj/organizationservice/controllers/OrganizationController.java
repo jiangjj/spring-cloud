@@ -1,14 +1,13 @@
 package com.jiangjj.organizationservice.controllers;
 
 import com.jiangjj.organizationservice.models.Organization;
+import com.jiangjj.organizationservice.models.OrganizationProto;
 import com.jiangjj.organizationservice.services.OrganizationService;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/v1/organizations")
@@ -18,9 +17,11 @@ public class OrganizationController {
     private static final Logger logger = LoggerFactory.getLogger(OrganizationController.class);
 
     @GetMapping(value = "/{organizationId}")
-    public Optional<Organization> getOrganizations(@PathVariable("organizationId") String organizationId) {
+    public OrganizationProto.Organization getOrganizations(@PathVariable("organizationId") Long organizationId) {
         logger.info("getOrganization by id:" + organizationId);
-        return organizationService.getOrganizations(organizationId);
+        OrganizationProto.Organization organization = organizationService.getOrganizations(organizationId);
+        logger.info(organization.toString());
+        return organization;
     }
 
     @PostMapping

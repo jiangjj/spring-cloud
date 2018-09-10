@@ -8,10 +8,10 @@ public class UserContext {
     public static final String USER_ID = "tmx-user-id";
     public static final String ORG_ID = "tmx-org-id";
 
-    private static final ThreadLocal<String> correlationId = new ThreadLocal<>();
-    private static final ThreadLocal<String> authToken = new ThreadLocal<>();
-    private static final ThreadLocal<String> userId = new ThreadLocal<>();
-    private static final ThreadLocal<String> orgId = new ThreadLocal<>();
+    private static final ThreadLocal<String> correlationId = new InheritableThreadLocal<>();
+    private static final ThreadLocal<String> authToken = new InheritableThreadLocal<>();
+    private static final ThreadLocal<String> userId = new InheritableThreadLocal<>();
+    private static final ThreadLocal<String> orgId = new InheritableThreadLocal<>();
 
     public static String getCorrelationId() {
         return correlationId.get();

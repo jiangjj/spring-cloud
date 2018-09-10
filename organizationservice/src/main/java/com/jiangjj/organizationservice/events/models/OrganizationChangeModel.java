@@ -10,6 +10,6 @@ import lombok.Setter;
 public class OrganizationChangeModel {
     private String type;
     private String action;
-    private String organizationId;
+    private Long organizationId;
     private String correlationId;
 }

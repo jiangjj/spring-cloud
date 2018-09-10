@@ -1,10 +1,12 @@
 package com.jiangjj.licensingservice.controllers;
 
+import com.jiangjj.licensingservice.configs.MyMessage;
 import com.jiangjj.licensingservice.models.License;
 import com.jiangjj.licensingservice.services.LicenseService;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +19,9 @@ public class LicenseController {
 
     private LicenseService licenseService;
 
+    private MyMessage myMessage;
+
+    private Environment environment;
 
     private static final Logger logger = LoggerFactory.getLogger(LicenseController.class);
 
@@ -47,4 +52,8 @@ public class LicenseController {
     public void deleteLicenses(@PathVariable("licenseId") String licenseId, @RequestBody License license) {
         licenseService.deleteLicense(license);
     }
+
+
+
+
 }

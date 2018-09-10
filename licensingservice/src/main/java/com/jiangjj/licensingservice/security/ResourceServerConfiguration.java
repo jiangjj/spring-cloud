@@ -11,9 +11,11 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     public void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
+//                .antMatchers("/css/**", "/js/**", "/webjars/**", "/index", "/hystrix*/**", "/proxy.stream", "/favicon.ico").permitAll()
                 .antMatchers(HttpMethod.DELETE, "/v1/organizations/**")
                 .hasRole("ADMIN")
-                .anyRequest()
-                .authenticated();
+                .antMatchers("v1/**").authenticated()
+                .anyRequest().permitAll();
+//                .authenticated();
     }
 }

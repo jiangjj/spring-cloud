@@ -13,6 +13,6 @@ import java.io.Serializable;
 @Data
 public class Organization implements Serializable{
     @Id
-    private String id;
+    private Long id;
     private String name;
 }
