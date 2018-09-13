@@ -1,10 +1,10 @@
 syntax = "proto2";
-//package com.jiangjj.organizationservice.models;
+package com.jiangjj.organizationservice.models;
 
  option java_package = "com.jiangjj.organizationservice.models";
  option java_outer_classname = "OrganizationProto";
 
  message  Organization{
-   required string id = 1;
+   required int64 id = 1;
    required string name = 2;
  }

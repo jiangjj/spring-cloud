@@ -1,13 +1,8 @@
 package com.jiangjj.organizationservice;
 
-import com.jiangjj.organizationservice.configs.ShardingJdbcConfiguration;
 import com.jiangjj.organizationservice.utils.UserContextInterceptor;
-import io.shardingsphere.core.api.MasterSlaveDataSourceFactory;
-import io.shardingsphere.core.api.config.MasterSlaveRuleConfiguration;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -19,10 +14,10 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.http.converter.protobuf.ProtobufHttpMessageConverter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.web.client.RestTemplate;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import javax.sql.DataSource;
-import java.sql.SQLException;
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
 
 @SpringBootApplication
 @EnableResourceServer
@@ -30,6 +25,7 @@ import java.util.*;
 @EnableCircuitBreaker
 @EnableHystrixDashboard
 @EnableCaching
+@EnableSwagger2
 public class OrganizationserviceApplication {
 
 	@Primary
@@ -51,7 +47,7 @@ public class OrganizationserviceApplication {
 		return new ProtobufHttpMessageConverter();
 	}
 
-	@Bean
+	/*@Bean
 	public DataSource dataSource(ShardingJdbcConfiguration shardingJdbcConfiguration) {
 		DataSource dataSource = null;
 		Map<String, DataSource> dataSourceMap = new HashMap<>(shardingJdbcConfiguration.getDataSources());
@@ -63,7 +59,8 @@ public class OrganizationserviceApplication {
 			e.printStackTrace();
 		}
 		return dataSource;
-	}
+	}*/
+
 	public static void main(String[] args) {
 		SpringApplication.run(OrganizationserviceApplication.class, args);
 	}

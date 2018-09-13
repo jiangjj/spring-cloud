@@ -1,22 +1,24 @@
 version:  '3'
 services:
   db-dev:
-    image: paintedfox/postgresql
+    image: mysql:5.7
+    restart: always
     environment:
-      USER: "root"
-      DB: "testdb"
-      PASS: "postgresql"
+      MYSQL_DATABASE: "testdb"
+      MYSQL_ROOT_PASSWORD: "root"
     ports:
-      - "5432:5432"
+    - "3306:3306"
 
   redis:
     image: redis
+    restart: always
     command: redis-server --appendonly yes
     ports:
       - "6379:6379"
 
   mq-dev:
     image: rabbitmq:3-management
+    restart: always
     ports:
       - "15672:15672"
       - "5672:5672"
@@ -24,27 +26,32 @@ services:
   config-server:
     build: config-server
     image: springboot/configs-server
+    restart: always
     ports:
       - "8888:8888"
 
   service-discovery:
     build: service-discovery
     image: springboot/service-discovery
+    restart: always
     ports:
       - "8761:8761"
 
   oauth2:
     build: oauth2
     image: springboot/oauth2
+    restart: always
 
   api-gateway:
     build: zuul
     image: springboot/zuul
+    restart: always
     ports:
       - "9000:9000"
 
   zipkin:
     image: openzipkin/zipkin
+    restart: always
     ports:
       - "9411:9411"
     environment:

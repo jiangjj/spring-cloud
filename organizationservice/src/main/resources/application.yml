@@ -1,7 +1,7 @@
 spring:
   datasource:
     username: root
-    password: mysql
+    password: root
     url: jdbc:mysql://db-dev:3306/testdb?useSSL=false
   jpa:
     hibernate:

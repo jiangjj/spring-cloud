@@ -16,7 +16,7 @@ public class SimpleSourceBean {
 
     private static final Logger logger = LoggerFactory.getLogger(SimpleSourceBean.class);
 
-    public void publishOrgChange(String action,Long  orgId) {
+    public void publishOrgChange(String action, Long orgId) {
         logger.debug("Sending RabbitMQ message {} for Organization Id: {}", action, orgId);
         OrganizationChangeModel changeModel = new OrganizationChangeModel(OrganizationChangeModel.class.getTypeName(),
                 action, orgId, UserContext.getCorrelationId());

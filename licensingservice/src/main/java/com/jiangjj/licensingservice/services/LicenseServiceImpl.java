@@ -2,7 +2,6 @@ package com.jiangjj.licensingservice.services;
 
 import com.jiangjj.licensingservice.clients.OrganizationServiceClient;
 import com.jiangjj.licensingservice.models.License;
-import com.jiangjj.licensingservice.models.Organization;
 import com.jiangjj.licensingservice.repositories.LicenseRepository;
 import com.jiangjj.organizationservice.models.OrganizationProto;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -24,9 +22,10 @@ public class LicenseServiceImpl implements LicenseService{
 
     @Override
     @HystrixCommand
-    public License getLicense(String organizationId, String licenseId) {
+    public License getLicense(Long organizationId, Long licenseId) {
         License license = licenseRepository.findByOrganizationIdAndLicenseId(organizationId, licenseId);
-        OrganizationProto.Organization organization = templateClient.getOrganization(organizationId);
+        OrganizationProto.Organization organization = templateClient.getOrganizationProtobuf(organizationId);
+//        Organization organization = templateClient.getOrganizationJson(organizationId);
         license.setOrganizationName(organization.getName());
         return license;
     }
@@ -44,7 +43,7 @@ public class LicenseServiceImpl implements LicenseService{
                 @HystrixProperty(name = "metrics.rollingStats.timeInMilliseconds", value = "15000"),
                 @HystrixProperty(name = "metrics.rollingStats.numBuckets", value = "5")
         })
-    public List<License> getLicenseByOrg(String organizationId) {
+    public List<License> getLicenseByOrg(Long organizationId) {
         randomlyRunLong();
         return licenseRepository.findByOrganizationId(organizationId);
     }
@@ -64,10 +63,11 @@ public class LicenseServiceImpl implements LicenseService{
             e.printStackTrace();
         }
     }
-    private List<License> bulidFallbackLicenseList(String organizationId) {
+
+    private List<License> bulidFallbackLicenseList(Long organizationId) {
         List<License> fallbackList = new ArrayList<>();
         License license = new License();
-        license.setLicenseId("000000-00-00000");
+        license.setLicenseId(null);
         license.setOrganizationId(organizationId);
         license.setLicenseName("Sorry no licensing information currently available");
         fallbackList.add(license);
@@ -76,7 +76,6 @@ public class LicenseServiceImpl implements LicenseService{
     @Override
     @HystrixCommand
     public void saveLicense(License license) {
-        license.setLicenseId(UUID.randomUUID().toString());
         licenseRepository.save(license);
     }
 

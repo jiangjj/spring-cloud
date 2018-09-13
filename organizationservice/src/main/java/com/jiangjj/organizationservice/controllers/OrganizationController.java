@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping(value = "/v1/organizations")
 @AllArgsConstructor
@@ -16,11 +18,22 @@ public class OrganizationController {
     private OrganizationService organizationService;
     private static final Logger logger = LoggerFactory.getLogger(OrganizationController.class);
 
-    @GetMapping(value = "/{organizationId}")
+    @GetMapping(value = "/{organizationId}", consumes = "application/x-protobuf", produces = "application/x-protobuf")
     public OrganizationProto.Organization getOrganizations(@PathVariable("organizationId") Long organizationId) {
-        logger.info("getOrganization by id:" + organizationId);
-        OrganizationProto.Organization organization = organizationService.getOrganizations(organizationId);
-        logger.info(organization.toString());
+        Optional<Organization> organization = organizationService.getOrganizations(organizationId);
+        OrganizationProto.Organization organizationProto = OrganizationProto.Organization.getDefaultInstance();
+        if (organization.isPresent()) {
+            organizationProto = OrganizationProto.Organization.newBuilder()
+                    .setId(organization.get().getId())
+                    .setName(organization.get().getName())
+                    .build();
+        }
+        return organizationProto;
+    }
+
+    @GetMapping(value = "/{organizationId}", consumes = "application/json", produces = "application/json")
+    public Optional<Organization> getOrganizationsJson(@PathVariable("organizationId") Long organizationId) {
+        Optional<Organization> organization = organizationService.getOrganizations(organizationId);
         return organization;
     }
 
@@ -30,15 +43,17 @@ public class OrganizationController {
     }
 
     @PutMapping(value = "/{organizationId}")
-    public void updateOrganizations(@PathVariable("organizationId") String organizationId,
+    public void updateOrganizations(@PathVariable("organizationId") Long organizationId,
                                     @RequestBody Organization organization) {
+        organization.setId(organizationId);
         organizationService.updateOrganizations(organization);
     }
 
     @DeleteMapping(value = "/{organizationId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteOrganizations(@PathVariable("organizationId") String organizationId,
+    public void deleteOrganizations(@PathVariable("organizationId") Long organizationId,
                                     @RequestBody Organization organization) {
+        organization.setId(organizationId);
         organizationService.deleteOrganizations(organization);
     }
 }

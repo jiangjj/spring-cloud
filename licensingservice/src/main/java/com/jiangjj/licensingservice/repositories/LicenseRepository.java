@@ -5,7 +5,8 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface LicenseRepository extends CrudRepository<License, String>{
-    License findByOrganizationIdAndLicenseId(String organizationId, String licenseId);
-    List<License> findByOrganizationId(String organizationId);
+public interface LicenseRepository extends CrudRepository<License, Long> {
+    License findByOrganizationIdAndLicenseId(Long organizationId, Long licenseId);
+
+    List<License> findByOrganizationId(Long organizationId);
 }

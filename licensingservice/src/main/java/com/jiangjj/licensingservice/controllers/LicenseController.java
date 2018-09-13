@@ -26,13 +26,13 @@ public class LicenseController {
     private static final Logger logger = LoggerFactory.getLogger(LicenseController.class);
 
     @GetMapping
-    public List<License> getLicenses(@PathVariable("organizationId") String organizationId) {
+    public List<License> getLicenses(@PathVariable("organizationId") Long organizationId) {
         return licenseService.getLicenseByOrg(organizationId);
     }
 
     @GetMapping(value = "/{licenseId}")
-    public License getLicense(@PathVariable("organizationId") String organizationId,
-    @PathVariable("licenseId") String licenseId) {
+    public License getLicense(@PathVariable("organizationId") Long organizationId,
+                              @PathVariable("licenseId") Long licenseId) {
         logger.info("getLicense by orgainzationId:" + organizationId + ", licenseId:" + licenseId);
         return licenseService.getLicense(organizationId, licenseId);
     }
@@ -43,13 +43,15 @@ public class LicenseController {
     }
 
     @PutMapping(value = "/{licenseId}")
-    public void updateLicenses(@PathVariable("licenseId") String licenseId, @RequestBody License license) {
+    public void updateLicenses(@PathVariable("licenseId") Long licenseId, @RequestBody License license) {
+        license.setLicenseId(licenseId);
         licenseService.updateLicense(license);
     }
 
     @DeleteMapping(value = "/{licenseId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteLicenses(@PathVariable("licenseId") String licenseId, @RequestBody License license) {
+    public void deleteLicenses(@PathVariable("licenseId") Long licenseId, @RequestBody License license) {
+        license.setLicenseId(licenseId);
         licenseService.deleteLicense(license);
     }
 

@@ -3,4 +3,4 @@ spring:
     name: licensingservice
   cloud:
     config:
-      uri: http://configs-server:8888
+      uri: http://config-server:8888

@@ -5,9 +5,9 @@ import com.jiangjj.licensingservice.models.License;
 import java.util.List;
 
 public interface LicenseService {
-    License getLicense(String organizationId, String licenseId);
+    License getLicense(Long organizationId, Long licenseId);
 
-    List<License> getLicenseByOrg(String organizationId);
+    List<License> getLicenseByOrg(Long organizationId);
 
     void saveLicense(License license);
 
