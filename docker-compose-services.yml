@@ -3,7 +3,9 @@ services:
   licensingservice:
     build: licensingservice
     image: springboot/licensingservice
+    restart: always
 
   organizationservice:
     build: organizationservice
     image: springboot/organizationservice
+    restart: always
