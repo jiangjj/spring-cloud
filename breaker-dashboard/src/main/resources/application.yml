@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: breaker-dashboard
+server:
+  port: 9090
+eureka:
+  client:
+    service-url:
+      defaultZone: http://service-discovery:8761/eureka/
+turbine:
+  app-config: licensingservice, organizationservice
+  aggregator:
+    cluster-config: default
+  cluster-name-expression: "'default'"
