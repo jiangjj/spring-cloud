@@ -14,8 +14,8 @@ spring:
     show-sql: true
   zipkin:
     base-url: http://zipkin:9411/
-    sender:
-      type: rabbit
+#    sender:
+#      type: rabbit
   sleuth:
     sampler:
       probability: 1.0

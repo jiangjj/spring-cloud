@@ -25,26 +25,26 @@ services:
 
   config-server:
     build: config-server
-    image: springboot/config-server
+    image: jiangjj/config-server
     restart: always
     ports:
       - "8888:8888"
 
   service-discovery:
     build: service-discovery
-    image: springboot/service-discovery
+    image: jiangjj/service-discovery
     restart: always
     ports:
       - "8761:8761"
 
   oauth2:
     build: oauth2
-    image: springboot/oauth2
+    image: jiangjj/oauth2
     restart: always
 
   api-gateway:
     build: zuul
-    image: springboot/zuul
+    image: jiangjj/zuul
     restart: always
     ports:
       - "9000:9000"
@@ -59,7 +59,7 @@ services:
 
   breaker-dashboard:
     build: breaker-dashboard
-    image: springboot/breaker-dashboard
+    image: jiangjj/breaker-dashboard
     restart: always
     ports:
     - "9090:9090"
