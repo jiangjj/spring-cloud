@@ -1,12 +1,11 @@
 package com.jiangjj.organizationservice.controllers;
 
 import com.jiangjj.organizationservice.models.Organization;
-import com.jiangjj.organizationservice.models.OrganizationProto;
 import com.jiangjj.organizationservice.services.OrganizationService;
 import lombok.AllArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -14,27 +13,20 @@ import java.util.Optional;
 @RestController
 @RequestMapping(value = "/v1/organizations")
 @AllArgsConstructor
+@Slf4j
 public class OrganizationController {
     private OrganizationService organizationService;
-    private static final Logger logger = LoggerFactory.getLogger(OrganizationController.class);
 
-    @GetMapping(value = "/{organizationId}", consumes = "application/x-protobuf", produces = "application/x-protobuf")
-    public OrganizationProto.Organization getOrganizations(@PathVariable("organizationId") Long organizationId) {
+    @GetMapping(value = "/{organizationId}", produces = "application/json")
+    public ResponseEntity<Organization> getOrganizationsJson(@PathVariable("organizationId") Long organizationId) {
         Optional<Organization> organization = organizationService.getOrganizations(organizationId);
-        OrganizationProto.Organization organizationProto = OrganizationProto.Organization.getDefaultInstance();
-        if (organization.isPresent()) {
-            organizationProto = OrganizationProto.Organization.newBuilder()
-                    .setId(organization.get().getId())
-                    .setName(organization.get().getName())
-                    .build();
-        }
-        return organizationProto;
+        return ResponseEntity.ok().body(organization.get());
     }
 
-    @GetMapping(value = "/{organizationId}", consumes = "application/json", produces = "application/json")
-    public Optional<Organization> getOrganizationsJson(@PathVariable("organizationId") Long organizationId) {
+    @GetMapping(value = "/{organizationId}", produces = "application/x-protobuf")
+    public ResponseEntity<Organization> getOrganizationsProtoStuff(@PathVariable("organizationId") Long organizationId) {
         Optional<Organization> organization = organizationService.getOrganizations(organizationId);
-        return organization;
+        return ResponseEntity.ok().body(organization.get());
     }
 
     @PostMapping

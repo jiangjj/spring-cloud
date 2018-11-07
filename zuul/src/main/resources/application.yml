@@ -12,3 +12,14 @@ zuul:
 ribbon:
   ReadTimeout: 600000
   ConnectTimeout: 60000
+spring:
+  zipkin:
+    base-url: http://zipkin:9411/
+    sender:
+      type: rabbit
+  sleuth:
+    sampler:
+      probability: 1.0
+      percentage: 1.0
+  rabbitmq:
+    host: mq-dev

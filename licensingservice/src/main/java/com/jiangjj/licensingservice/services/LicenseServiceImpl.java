@@ -2,8 +2,8 @@ package com.jiangjj.licensingservice.services;
 
 import com.jiangjj.licensingservice.clients.OrganizationServiceClient;
 import com.jiangjj.licensingservice.models.License;
+import com.jiangjj.licensingservice.models.Organization;
 import com.jiangjj.licensingservice.repositories.LicenseRepository;
-import com.jiangjj.organizationservice.models.OrganizationProto;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import lombok.AllArgsConstructor;
@@ -24,8 +24,7 @@ public class LicenseServiceImpl implements LicenseService{
     @HystrixCommand
     public License getLicense(Long organizationId, Long licenseId) {
         License license = licenseRepository.findByOrganizationIdAndLicenseId(organizationId, licenseId);
-        OrganizationProto.Organization organization = templateClient.getOrganizationProtobuf(organizationId);
-//        Organization organization = templateClient.getOrganizationJson(organizationId);
+        Organization organization = templateClient.getOrganizationProtobuf(organizationId);
         license.setOrganizationName(organization.getName());
         return license;
     }

@@ -1,13 +1,12 @@
 package com.jiangjj.licensingservice.controllers;
 
-import com.jiangjj.licensingservice.configs.MyMessage;
 import com.jiangjj.licensingservice.models.License;
 import com.jiangjj.licensingservice.services.LicenseService;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,22 +18,18 @@ public class LicenseController {
 
     private LicenseService licenseService;
 
-    private MyMessage myMessage;
-
-    private Environment environment;
-
     private static final Logger logger = LoggerFactory.getLogger(LicenseController.class);
 
     @GetMapping
-    public List<License> getLicenses(@PathVariable("organizationId") Long organizationId) {
-        return licenseService.getLicenseByOrg(organizationId);
+    public ResponseEntity<List<License>> getLicenses(@PathVariable("organizationId") Long organizationId) {
+        return ResponseEntity.ok().body(licenseService.getLicenseByOrg(organizationId));
     }
 
     @GetMapping(value = "/{licenseId}")
-    public License getLicense(@PathVariable("organizationId") Long organizationId,
+    public ResponseEntity<License> getLicense(@PathVariable("organizationId") Long organizationId,
                               @PathVariable("licenseId") Long licenseId) {
         logger.info("getLicense by orgainzationId:" + organizationId + ", licenseId:" + licenseId);
-        return licenseService.getLicense(organizationId, licenseId);
+        return ResponseEntity.ok().body(licenseService.getLicense(organizationId, licenseId));
     }
 
     @PostMapping
