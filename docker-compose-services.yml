@@ -2,10 +2,10 @@ version:  '3'
 services:
   licensingservice:
     build: licensingservice
-    image: springboot/licensingservice
+    image: jiangjj/licensingservice
     restart: always
 
   organizationservice:
     build: organizationservice
-    image: springboot/organizationservice
+    image: jiangjj/organizationservice
     restart: always

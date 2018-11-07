@@ -15,11 +15,10 @@ ribbon:
 spring:
   zipkin:
     base-url: http://zipkin:9411/
-    sender:
-      type: rabbit
-  sleuth:
-    sampler:
-      probability: 1.0
-      percentage: 1.0
+#    sender:
+#      type: rabbit
+    sleuth:
+      sampler:
+        probability: 1.0
   rabbitmq:
     host: mq-dev
